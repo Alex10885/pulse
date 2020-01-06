@@ -1,23 +1,19 @@
-$(document).ready(function() {
+$(document).ready(function () {
   $(".carousel__inner").slick({
     speed: 1500,
     //adaptiveHeight: true,
-    prevArrow:
-      '<button type="button" class="slick-prev"><img src="img/slider/chevron-left-solid.png"></button>',
-    nextArrow:
-      '<button type="button" class="slick-next"><img src="img/slider/chevron-right-solid.png"></button>',
-    responsive: [
-      {
-        breakpoint: 768,
-        settings: {
-          arrows: false,
-          dots: true
-        }
+    prevArrow: '<button type="button" class="slick-prev"><img src="img/slider/chevron-left-solid.png"></button>',
+    nextArrow: '<button type="button" class="slick-next"><img src="img/slider/chevron-right-solid.png"></button>',
+    responsive: [{
+      breakpoint: 768,
+      settings: {
+        arrows: false,
+        dots: true
       }
-    ]
+    }]
   });
 
-  $("ul.catalog__tabs").on("click", "li:not(.catalog__tab_active)", function() {
+  $("ul.catalog__tabs").on("click", "li:not(.catalog__tab_active)", function () {
     $(this)
       .addClass("catalog__tab_active")
       .siblings()
@@ -30,8 +26,8 @@ $(document).ready(function() {
   });
 
   function toggleSlide(item) {
-    $(item).each(function(i) {
-      $(this).on("click", function(e) {
+    $(item).each(function (i) {
+      $(this).on("click", function (e) {
         e.preventDefault();
         $(".catalog-item__content")
           .eq(i)
@@ -47,11 +43,11 @@ $(document).ready(function() {
   toggleSlide(".catalog-item__back");
 
   // Modal
-  $("[data-modal=consultation]").on("click", function() {
+  $("[data-modal=consultation]").on("click", function () {
     $(".overlay, #consultation").fadeIn("slow");
   });
 
-  $(".modal__close").on("click", function() {
+  $(".modal__close").on("click", function () {
     $(".overlay, #consultation, #order").fadeOut("slow");
   });
 
@@ -59,12 +55,12 @@ $(document).ready(function() {
   //   $('.overlay, #order').fadeIn('slow');
   // });
 
-  $(".button_mini").each(function(i) {
-    $(this).on("click", function() {
+  $(".button_mini").each(function (i) {
+    $(this).on("click", function () {
       $("#order .modal__descr").text(
         $(".catalog-item__subtitle")
-          .eq(i)
-          .text()
+        .eq(i)
+        .text()
       );
       $(".overlay, #order").fadeIn("slow");
     });
@@ -97,13 +93,13 @@ $(document).ready(function() {
 
   $("input[name=phone]").mask("+7(999) 999-9999");
 
-  $("form").submit(function(e) {
+  $("form").submit(function (e) {
     e.preventDefault();
     $.ajax({
       type: "POST",
       url: "mailer/smart.php",
       data: $(this).serialize()
-    }).done(function() {
+    }).done(function () {
       $(this)
         .find("input")
         .val("");
@@ -116,7 +112,7 @@ $(document).ready(function() {
   });
 
   //скролл
-  $(window).scroll(function() {
+  $(window).scroll(function () {
     if ($(this).scrollTop() > 1600) {
       $(".pageup").fadeIn();
     } else {
@@ -124,9 +120,11 @@ $(document).ready(function() {
     }
   });
 
-  $("a[href^='#']").click(function() {
+  $("a[href=#up]").click(function () {
     const _href = $(this).attr("href");
-    $("html, body").animate({ scrollTop: $(_href).offset().top + "px" });
+    $("html, body").animate({
+      scrollTop: $(_href).offset().top + "px"
+    });
     return false;
   });
 
