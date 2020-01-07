@@ -66,12 +66,51 @@ gulp.task('fonts', function () {
 
 gulp.task('icons', function () {
   return gulp.src("src/icons/**/*")
+    .pipe(imagemin([
+      imagemin.gifsicle({
+        interlaced: true
+      }),
+      imagemin.jpegtran({
+        progressive: true
+      }),
+      imagemin.optipng({
+        optimizationLevel: 5
+      }),
+      imagemin.svgo({
+        plugins: [{
+            removeViewBox: true
+          },
+          {
+            cleanupIDs: false
+          }
+        ]
+      })
+    ]))
     .pipe(gulp.dest('dist/icons'));
 });
 
 gulp.task('images', function () {
   return gulp.src("src/img/**/*")
-    .pipe(imagemin())
+    .pipe(imagemin([
+      imagemin.gifsicle({
+        interlaced: true
+      }),
+      imagemin.jpegtran({
+        progressive: true
+      }),
+      imagemin.optipng({
+        optimizationLevel: 5
+      }),
+      imagemin.svgo({
+        plugins: [{
+            removeViewBox: true
+          },
+          {
+            cleanupIDs: false
+          }
+        ]
+      })
+    ]))
     .pipe(gulp.dest('dist/img'));
 });
 
